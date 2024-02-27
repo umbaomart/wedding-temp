@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/guests', function() {
+    return 'This is Guest API';
+});
+
+
+// Route::get('/guests', 'guests@index');
+// Route::get('/products/{id}', 'ProductController@show');
+// Route::post('/products', 'ProductController@store');
+// Route::put('/products/{id}', 'ProductController@update');
+// Route::delete('/products/{id}', 'ProductController@destroy');
