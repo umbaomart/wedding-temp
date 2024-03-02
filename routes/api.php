@@ -13,10 +13,4 @@ Route::get('/guests', [GuestsController::class, 'index']);
 Route::post('/guests', [GuestsController::class, 'store']);
 Route::get('/guests/{id}', [GuestsController::class, 'show']);
 Route::get('/guests/{id}/edit', [GuestsController::class, 'edit']);
-
-
-
-// Route::get('/products/{id}', 'ProductController@show');
-// Route::post('/products', 'ProductController@store');
-// Route::put('/products/{id}', 'ProductController@update');
-// Route::delete('/products/{id}', 'ProductController@destroy');
+Route::put('/guests/{id}/edit', [GuestsController::class, 'update']);

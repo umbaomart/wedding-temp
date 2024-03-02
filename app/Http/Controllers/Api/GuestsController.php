@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 
 class GuestsController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $guests = Guests::all();
 
         if ($guests->count() > 0) {
@@ -26,7 +27,8 @@ class GuestsController extends Controller
         }
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:191',
             'phone' => 'required|digits:10',
@@ -36,15 +38,15 @@ class GuestsController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status'=> 422,
-                'errors'=> $validator->messages(),
+                'status' => 422,
+                'errors' => $validator->messages(),
             ], 422);
         } else {
             $guests = Guests::create([
-                'name'=> $request->name,
-                'phone'=> $request->phone,
-                'tags'=> $request->tags,
-                'status'=> $request->status
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'tags' => $request->tags,
+                'status' => $request->status
             ]);
 
             if ($guests) {
@@ -61,7 +63,8 @@ class GuestsController extends Controller
         }
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $guest = Guests::find($id);
 
         if ($guest) {
@@ -77,7 +80,8 @@ class GuestsController extends Controller
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $guest = Guests::find($id);
 
         if ($guest) {
@@ -90,6 +94,45 @@ class GuestsController extends Controller
                 'status' => 404,
                 'message' => 'Guest Not Found!'
             ], 404);
+        }
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:191',
+            'phone' => 'required|digits:10',
+            'tags' => 'required|string|max:191',
+            'status' => 'required|string|max:191'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 422,
+                'errors' => $validator->messages(),
+            ], 422);
+        } else {
+
+            $guests = Guests::find($id);
+
+            if ($guests) {
+                $guests->update([
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'tags' => $request->tags,
+                    'status' => $request->status
+                ]);
+
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Guest updated successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Guest Not Found!'
+                ], 404);
+            }
         }
     }
 }
