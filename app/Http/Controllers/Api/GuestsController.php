@@ -76,4 +76,20 @@ class GuestsController extends Controller
             ], 404);
         }
     }
+
+    public function edit($id) {
+        $guest = Guests::find($id);
+
+        if ($guest) {
+            return response()->json([
+                'status' => 200,
+                'data' => $guest
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Guest Not Found!'
+            ], 404);
+        }
+    }
 }
