@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class GuestsController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $guests = Guests::all();
 
         if ($guests->count() > 0) {
@@ -59,6 +58,38 @@ class GuestsController extends Controller
                     'message' => 'Something went wrong!'
                 ], 500);
             }
+        }
+    }
+
+    public function show($id) {
+        $guest = Guests::find($id);
+
+        if ($guest) {
+            return response()->json([
+                'status' => 200,
+                'data' => $guest
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Guest Not Found!'
+            ], 404);
+        }
+    }
+
+    public function edit($id) {
+        $guest = Guests::find($id);
+
+        if ($guest) {
+            return response()->json([
+                'status' => 200,
+                'data' => $guest
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Guest Not Found!'
+            ], 404);
         }
     }
 }
