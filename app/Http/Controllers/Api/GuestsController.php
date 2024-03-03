@@ -135,4 +135,23 @@ class GuestsController extends Controller
             }
         }
     }
+
+    public function destroy($id)
+    {
+        $guest = Guests::find($id);
+
+        if ($guest) {
+            $guest->delete();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Guest Deleted Successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Guest Not Found!'
+            ], 404);
+        }
+    }
 }
