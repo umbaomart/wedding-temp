@@ -14,3 +14,4 @@ Route::post('/guests', [GuestsController::class, 'store']);
 Route::get('/guests/{id}', [GuestsController::class, 'show']);
 Route::get('/guests/{id}/edit', [GuestsController::class, 'edit']);
 Route::put('/guests/{id}/edit', [GuestsController::class, 'update']);
+Route::delete('/guests/{id}/delete', [GuestsController::class, 'destroy']);
